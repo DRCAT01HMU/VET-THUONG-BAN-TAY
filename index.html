@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Vết Thương Bàn Tay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        .handbook-table th, .handbook-table td {
+            border-color: #4b5563; /* border-gray-700 */
+            padding: 12px 16px;
+            vertical-align: top;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .handbook-table thead th {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #f9fafb; /* text-gray-50 */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .section-header {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .section-header:hover {
+            background-color: #374151; /* bg-gray-700 */
+        }
+        .section-content:not(.section-header):hover {
+            background-color: rgba(55, 65, 81, 0.3);
+            transform: scale(1.01);
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+        .glow-blue { text-shadow: 0 0 8px rgba(96, 165, 250, 0.4); }
+        .glow-yellow { text-shadow: 0 0 8px rgba(250, 204, 21, 0.5); }
+        .glow-red { text-shadow: 0 0 8px rgba(248, 113, 113, 0.5); }
+        .glow-white { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+
+        code {
+            background-color: #374151;
+            color: #93c5fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        #scrollTopBtn {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        ul {
+            list-style-position: outside;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        #watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 10vw;
+            font-weight: 800; /* extra-bold */
+            color: rgba(255, 255, 255, 0.04);
+            pointer-events: none;
+            user-select: none;
+            z-index: 1000;
+        }
+        .toggle-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="watermark">TEAMDRCAT</div>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-2">Cẩm Nang Vết Thương Bàn Tay</h1>
+            <p class="text-base text-gray-400">Dữ liệu được biên soạn và tổng hợp bởi TEAMDRCAT dựa trên kiến thức chuẩn Y Hà Nội và các Hướng dẫn Y Khoa cập nhật</p>
+        </header>
+
+        <div class="sticky top-0 z-20 py-4 bg-gray-900 bg-opacity-80 backdrop-blur-md mb-6">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm từ khoá (ví dụ: gân gấp, mallet finger...)" class="w-full p-3 pl-10 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+             <p id="searchResultCount" class="text-sm text-gray-500 mt-2 text-right"></p>
+        </div>
+        
+        <div class="bg-gray-800 rounded-lg shadow-xl overflow-x-auto">
+            <table class="w-full text-sm md:text-base handbook-table" id="handbookTable">
+                <thead class="text-left">
+                    <tr>
+                        <th class="w-1/5">Hạng mục</th>
+                        <th class="w-2/5">Nội dung chi tiết</th>
+                        <th class="w-2/5">Lưu ý lâm sàng & Điểm chính</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Section I: Đại Cương -->
+                    <tr class="bg-gray-700 text-white font-semibold section-header" data-section="section-1">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                                <span class="glow-white">I. ĐẠI CƯƠNG</span>
+                            </div>
+                            <svg class="toggle-icon w-5 h-5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /> </svg>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><span class="font-semibold text-blue-400 glow-blue">1. Tầm quan trọng</span></td>
+                        <td>- Vết thương bàn tay là tổn thương rất thường gặp, chiếm 40-60% tai nạn lao động. <br> - Bàn tay có nhiều cấu trúc giải phẫu tinh tế, phức tạp trên một diện tích nhỏ hẹp.</td>
+                        <td><span class="font-semibold text-yellow-300 glow-yellow">⚠️ Mọi vết thương bàn tay, dù nhỏ, đều phải được xem là phức tạp cho đến khi chứng minh được điều ngược lại.</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><span class="font-semibold text-blue-400 glow-blue">2. Đặc điểm</span></td>
+                        <td>- <span class="font-semibold">Dễ nhiễm trùng</span>: Do chức năng cầm nắm nên thường xuyên tiếp xúc với chất bẩn. Các bao hoạt dịch có thể thông nhau, gây viêm tấy lan tỏa (ví dụ: <code>áp xe hình móng ngựa</code>). <br> - <span class="font-semibold">Dễ hoại tử, lộ cấu trúc</span>: Ít có cơ lớn và mô che phủ, vết thương mất da rộng dễ gây lộ và hoại tử gân, xương. <br> - <span class="font-semibold">Dễ gây tàn phế</span>: Do dính gân, cứng khớp, can lệch xương, hoặc mất cảm giác tinh tế.</td>
+                        <td>- Luôn nghĩ đến nhiễm trùng sâu (viêm bao gân, viêm khớp) khi có vết thương nhỏ nhưng sưng đau nhiều. <br> - <span class="font-semibold text-sky-300 glow-blue">Ưu tiên hàng đầu là che phủ các cấu trúc quan trọng (gân, xương, thần kinh).</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><span class="font-semibold text-blue-400 glow-blue">3. Yêu cầu điều trị</span></td>
+                        <td>- <span class="font-semibold">Yêu cầu rất cao</span>: Cả về phục hồi giải phẫu và chức năng. <br> - <span class="font-semibold">Điều trị một thì</span>: Lý tưởng nhất là tất cả các tổn thương (xương, gân, mạch máu, thần kinh) đều được sửa chữa ngay trong lần mổ đầu tiên. <br> - <span class="font-semibold">Phục hồi chức năng (PHCN) sớm</span>: Là yếu tố then chốt quyết định thành công của điều trị.</td>
+                        <td><span class="font-semibold">"Phẫu thuật hoàn hảo + PHCN đúng đắn = Kết quả tối ưu".</span></td>
+                    </tr>
+
+                    <!-- Section II: Giải Phẫu Ứng Dụng -->
+                    <tr class="bg-gray-700 text-white font-semibold section-header" data-section="section-2">
+                         <td colspan="3" class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 000-7.07m7.072 0a5 5 0 000 7.07M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span class="glow-white">II. GIẢI PHẪU ỨNG DỤNG</span>
+                            </div>
+                            <svg class="toggle-icon w-5 h-5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /> </svg>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><span class="font-semibold text-blue-400 glow-blue">1. Da</span></td>
+                        <td>- <span class="font-semibold">Da gan tay</span>: Dày, không di động, có các nếp gấp tự nhiên. <br> - <span class="font-semibold">Da mu tay</span>: Mỏng, di động, hệ thống tĩnh mạch nông. <br> - <span class="font-semibold">Đường rạch da</span>: Ziczac (Brunner) để tránh sẹo co rút.</td>
+                        <td>🔪 <span class="font-semibold text-red-400 glow-red">Không bao giờ rạch da thẳng và vuông góc với các nếp gấp của ngón tay.</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><span class="font-semibold text-blue-400 glow-blue">2. Gân gấp</span></td>
+                        <td>- <span class="font-semibold">Cấu trúc</span>: Ngón dài có FDS & FDP. Ngón cái có FPL. <br> - <span class="font-semibold">Ròng rọc</span>: Nhẫn (A1-A5) & chéo (C1-C3). <br> - <span class="font-semibold">5 Vùng (Verdan)</span>: Vùng 2 (<code>"No Man's Land"</code>) là vùng khó nhất.</td>
+                        <td>- <span class="font-semibold">Ròng rọc <code>A2</code> và <code>A4</code> là quan trọng nhất</span>; phải bảo tồn/tái tạo để tránh <code>"bowstringing"</code>. <br> - <span class="font-semibold">Ưu tiên khâu gân gấp sâu (FDP)</span>.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><span class="font-semibold text-blue-400 glow-blue">3. Gân duỗi</span></td>
+                        <td>- <span class="font-semibold">Cấu trúc</span>: Mỏng & dẹt, cơ chế phức tạp (Loa gân duỗi). <br> - <span class="font-semibold">8 Vùng</span>: Vùng lẻ tương ứng với các khớp.</td>
+                        <td>- <code>Mallet Finger</code>: Tổn thương Vùng I (khớp DIP). <br> - <code>Boutonnière Deformity</code>: Tổn thương Vùng III (khớp PIP).</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-2">
+                        <td><span class="font-semibold text-blue-400 glow-blue">4. Mạch máu & Thần kinh</span></td>
+                        <td>- <span class="font-semibold">Mạch máu</span>: Cung gan tay nông & sâu. <br> - <span class="font-semibold">TK Giữa</span>: VĐ đối chiếu ngón cái, CG 3,5 ngón quay. <br> - <span class="font-semibold">TK Trụ</span>: VĐ cơ nội tại, CG 1,5 ngón trụ. <br> - <span class="font-semibold">TK Quay</span>: VĐ duỗi, CG mu tay quay.</td>
+                        <td>- <code>Bàn tay khỉ (Ape Hand)</code>: TK Giữa. <br> - <code>Bàn tay vuốt trụ (Claw Hand)</code>: TK Trụ. <br> - <code>Bàn tay rủ (Wrist Drop)</code>: TK Quay.</td>
+                    </tr>
+
+                    <!-- Section III: Chẩn Đoán -->
+                    <tr class="bg-gray-700 text-white font-semibold section-header" data-section="section-3">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                                <span class="glow-white">III. CHẨN ĐOÁN</span>
+                            </div>
+                            <svg class="toggle-icon w-5 h-5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /> </svg>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-3">
+                        <td><span class="font-semibold text-blue-400 glow-blue">1. Lâm sàng</span></td>
+                        <td>- <span class="font-semibold">Hỏi bệnh & Nhìn</span>: Cơ chế, tư thế nghỉ, biến dạng. <br> - <span class="font-semibold">Sờ & Vận động</span>: Điểm đau chói, cảm giác, test chuyên biệt.</td>
+                        <td><span class="font-semibold text-emerald-300">🕵️‍♂️ Nghiệm pháp quan trọng:</span> <br> - <span class="font-semibold">Test FDP</span>, <span class="font-semibold">Test FDS</span>, <span class="font-semibold">Test Elson</span>, <span class="font-semibold">Test Froment</span>.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-3">
+                        <td><span class="font-semibold text-blue-400 glow-blue">2. Cận lâm sàng</span></td>
+                        <td>- <span class="font-semibold">X-quang</span>: **Bắt buộc cho mọi vết thương**. <br> - <span class="font-semibold">Siêu âm</span>: Tìm dị vật không cản quang, đánh giá gân. <br> - <span class="font-semibold">CT/MRI</span>: Cho các ca phức tạp.</td>
+                        <td><span class="font-semibold text-yellow-300 glow-yellow">X-quang âm tính không loại trừ được tổn thương phần mềm.</span></td>
+                    </tr>
+
+                    <!-- Section IV: Điều Trị -->
+                     <tr class="bg-gray-700 text-white font-semibold section-header" data-section="section-4">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                                <span class="glow-white">IV. ĐIỀU TRỊ (CHI TIẾT)</span>
+                            </div>
+                            <svg class="toggle-icon w-5 h-5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /> </svg>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><span class="font-semibold text-blue-400 glow-blue">1. Xử trí ban đầu</span></td>
+                        <td>- <span class="font-semibold">5 bước cấp cứu</span>: Cầm máu -> Tháo trang sức -> Bất động -> Gác cao tay -> Dự phòng (Uốn ván, Kháng sinh, Giảm đau).</td>
+                        <td><span class="font-semibold text-red-400 glow-red">Không kẹp "mò" mạch máu trong vết thương.</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><span class="font-semibold text-blue-400 glow-blue">2. Chuẩn bị phẫu thuật</span></td>
+                        <td>- <span class="font-semibold">Vô cảm</span>: Tê đám rối TK cánh tay. <br> - <span class="font-semibold">Ga-rô</span>: Tối đa 90-120 phút. <br> - <span class="font-semibold">Dụng cụ</span>: Vi phẫu, chỉ không chấn thương.</td>
+                        <td>Phẫu thuật bàn tay đòi hỏi sự tỉ mỉ và kiên nhẫn.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-4">
+                        <td><span class="font-semibold text-blue-400 glow-blue">3. Xử trí theo từng tổn thương</span></td>
+                        <td><p class="font-semibold text-white mb-2">Da:</p>
+                        <ul><li>Cắt lọc "tiết kiệm", rửa sạch, che phủ bằng vạt (<code>vạt V-Y</code>) hoặc ghép da.</li></ul>
+                        <p class="font-semibold text-white mt-4 mb-2">Xương & Khớp:</p>
+                        <ul><li>Cố định vững chắc (<code>ORIF</code>, kim Kirschner) để tập sớm.</li></ul>
+                        <p class="font-semibold text-white mt-4 mb-2">Gân:</p>
+                        <ul><li>Khâu lõi 4-6 sợi (<code>Kessler</code>, <code>Tajima</code>) + khâu bao gân.</li></ul>
+                        <p class="font-semibold text-white mt-4 mb-2">Mạch máu & Thần kinh:</p>
+                        <ul><li>Vi phẫu, khâu nối không căng, ghép nếu mất đoạn.</li></ul></td>
+                        <td>- <span class="font-semibold">Thứ tự ưu tiên: <span class="text-emerald-300">Xương -> Gân -> Mạch máu -> Thần kinh -> Da.</span></span>
+                        <br>- Ngón cái là vua, phải cố gắng cứu.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><span class="font-semibold text-blue-400 glow-blue">4. Sau mổ & PHCN</span></td>
+                        <td>- <span class="font-semibold">Bất động</span>: Nẹp ở tư thế bảo vệ. <br> - <span class="font-semibold">Tập luyện</span>: Bắt đầu sớm (3-5 ngày) theo phác đồ (<code>Duran</code>, <code>Kleinert</code>) dưới sự hướng dẫn của chuyên gia.</td>
+                        <td><span class="font-semibold text-sky-300 glow-blue">PHCN là một phần bắt buộc, không thể tách rời của điều trị.</span></td>
+                    </tr>
+                    
+                     <!-- Section V: Các Loại Vết Thương Đặc Biệt -->
+                     <tr class="bg-gray-700 text-white font-semibold section-header" data-section="section-5">
+                        <td colspan="3" class="flex justify-between items-center">
+                             <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                <span class="glow-white">V. CÁC LOẠI VẾT THƯƠNG ĐẶC BIỆT</span>
+                            </div>
+                            <svg class="toggle-icon w-5 h-5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /> </svg>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-5">
+                        <td><span class="font-semibold text-blue-400 glow-blue">1. Vết thương đầu ngón</span></td>
+                        <td>- <span class="font-semibold">Nguyên tắc</span>: Bảo tồn tối đa chiều dài. <br> - <span class="font-semibold">Xử trí</span>: Sửa chữa giường móng, che phủ bằng vạt tại chỗ.</td>
+                        <td>- Ưu tiên dùng da gan tay để che phủ mỏm cụt.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-5">
+                        <td><span class="font-semibold text-blue-400 glow-blue">2. Vết cắn</span></td>
+                        <td>- <span class="font-semibold">Nguy cơ</span>: Nhiễm trùng cao (<code>Pasteurella</code>, <code>Eikenella</code>). <br> - <span class="font-semibold">Xử trí</span>: **Không khâu kín thì đầu**. Rửa sạch, cắt lọc, để hở, kháng sinh, phòng Dại/Uốn ván.</td>
+                        <td>- <code>"Fight bite"</code> trên khớp MCP phải được xem là vết thương khớp hở.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-5">
+                        <td><span class="font-semibold text-blue-400 glow-blue">3. Bơm tiêm áp lực cao</span></td>
+                        <td>- <span class="font-semibold">Đặc điểm</span>: **Cấp cứu tuyệt đối**. Vết vào nhỏ, tổn thương trong lớn. <br> - <span class="font-semibold">Xử trí</span>: Phẫu thuật giải áp khoang (<code>fasciotomy</code>) và cắt lọc ngay lập tức.</td>
+                        <td><span class="font-semibold text-red-500 glow-red">⚠️ Không bao giờ được đánh giá thấp.</span> Sự trì hoãn = cắt cụt.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-5">
+                        <td><span class="font-semibold text-blue-400 glow-blue">4. Bỏng</span></td>
+                        <td>- <span class="font-semibold">Hóa chất</span>: Rửa nước liên tục. Không trung hòa. <br> - <span class="font-semibold">Điện</span>: Tổn thương da là "phần nổi của tảng băng". Nguy cơ toàn thân và chèn ép khoang.</td>
+                        <td>- <span class="font-semibold">Bỏng kiềm</span> nguy hiểm hơn <span class="font-semibold">bỏng acid</span>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 transform translate-y-2 focus:outline-none hover:bg-blue-700">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+            const allContentRows = Array.from(tableBody.querySelectorAll('tr.section-content'));
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            const resultCountEl = document.getElementById('searchResultCount');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+            function updateView() {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+        
+                // Step 1: Determine which rows match the query
+                allContentRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        row.dataset.matchesQuery = 'true';
+                    } else {
+                        row.dataset.matchesQuery = 'false';
+                    }
+                });
+        
+                // Step 2: Determine visibility of headers based on query matches
+                sectionHeaders.forEach(header => {
+                    const sectionId = header.dataset.section;
+                    const contentRows = document.querySelectorAll(`.section-content[data-section="${sectionId}"]`);
+                    const hasMatchingContent = Array.from(contentRows).some(row => row.dataset.matchesQuery === 'true');
+                    header.style.display = hasMatchingContent ? '' : 'none';
+                    // Reapply flex for correct alignment if it's a td
+                    if(header.querySelector('td')) header.querySelector('td').style.display = 'flex';
+                });
+        
+                // Step 3: Determine visibility of content rows based on both query match and collapsed state
+                allContentRows.forEach(row => {
+                    const matches = row.dataset.matchesQuery === 'true';
+                    const isCollapsed = row.classList.contains('collapsed');
+                    if (matches && !isCollapsed) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Update result count
+                if (query) {
+                    resultCountEl.textContent = `${visibleCount} kết quả được tìm thấy.`;
+                } else {
+                    resultCountEl.textContent = '';
+                }
+            }
+        
+            // Event listener for collapsing/expanding sections
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sectionId = header.dataset.section;
+                    const contentRows = document.querySelectorAll(`tr.section-content[data-section="${sectionId}"]`);
+                    const icon = header.querySelector('.toggle-icon');
+                    
+                    const isCurrentlyCollapsed = contentRows[0].classList.contains('collapsed');
+                    
+                    contentRows.forEach(row => {
+                        if (isCurrentlyCollapsed) {
+                            row.classList.remove('collapsed');
+                        } else {
+                            row.classList.add('collapsed');
+                        }
+                    });
+        
+                    icon.style.transform = isCurrentlyCollapsed ? 'rotate(0deg)' : 'rotate(-180deg)';
+                    
+                    updateView(); // Update the entire view after toggling
+                });
+            });
+        
+            // Initial setup: collapse all sections except the first one
+            sectionHeaders.forEach(header => {
+                const sectionId = header.dataset.section;
+                const contentRows = document.querySelectorAll(`.section-content[data-section="${sectionId}"]`);
+                const icon = header.querySelector('.toggle-icon');
+
+                let isCollapsed = sectionId !== 'section-1';
+                
+                contentRows.forEach(row => {
+                    if (isCollapsed) row.classList.add('collapsed');
+                    else row.classList.remove('collapsed');
+                });
+
+                icon.style.transform = isCollapsed ? 'rotate(-180deg)' : 'rotate(0deg)';
+
+            });
+        
+            // Scroll to Top Button Functionality
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.remove('opacity-0', 'translate-y-2');
+                } else {
+                    scrollTopBtn.classList.add('opacity-0', 'translate-y-2');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        
+            // Initial render
+            updateView();
+        });
+    </script>
+
+</body>
+</html>
+
