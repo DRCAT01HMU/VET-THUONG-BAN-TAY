@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Vết Thương Bàn Tay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        .handbook-table th, .handbook-table td {
+            border-color: #4b5563; /* border-gray-700 */
+            padding: 12px 16px;
+            vertical-align: top;
+        }
+        .handbook-table thead th {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #f9fafb; /* text-gray-50 */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .section-header {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .section-header:hover {
+            background-color: #374151; /* bg-gray-700 */
+        }
+        code {
+            background-color: #374151;
+            color: #93c5fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .highlight {
+            background-color: #facc15; /* yellow-400 */
+            color: #111827;
+        }
+        #scrollTopBtn {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        ul {
+            list-style-position: outside;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        #watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 10vw;
+            font-weight: 800; /* extra-bold */
+            color: rgba(255, 255, 255, 0.04);
+            pointer-events: none;
+            user-select: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="watermark">TEAMDRCAT</div>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Cẩm Nang Vết Thương Bàn Tay</h1>
+            <p class="text-base text-gray-400">Dữ liệu được biên soạn và tổng hợp bởi TEAMDRCAT dựa trên kiến thức chuẩn Y Hà Nội và các Hướng dẫn Y Khoa cập nhật</p>
+        </header>
+
+        <div class="sticky top-0 z-20 py-4 bg-gray-900 bg-opacity-80 backdrop-blur-md mb-6">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm từ khoá (ví dụ: gân gấp, mallet finger...)" class="w-full p-3 pl-10 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+             <p id="searchResultCount" class="text-sm text-gray-500 mt-2 text-right"></p>
+        </div>
+        
+        <div class="bg-gray-800 rounded-lg shadow-xl overflow-x-auto">
+            <table class="w-full text-sm md:text-base handbook-table" id="handbookTable">
+                <thead class="text-left">
+                    <tr>
+                        <th class="w-1/5">Hạng mục</th>
+                        <th class="w-2/5">Nội dung chi tiết</th>
+                        <th class="w-2/5">Lưu ý lâm sàng & Điểm chính</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Section I: Đại Cương -->
+                    <tr class="bg-gray-700 text-white font-bold section-header" data-section="section-1">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <span>I. ĐẠI CƯƠNG</span>
+                            <span class="toggle-icon transform transition-transform">▼</span>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><strong>1. Tầm quan trọng</strong></td>
+                        <td>- Vết thương bàn tay là tổn thương rất thường gặp, chiếm 40-60% tai nạn lao động. <br> - Bàn tay có nhiều cấu trúc giải phẫu tinh tế, phức tạp trên một diện tích nhỏ hẹp.</td>
+                        <td><span class="font-bold text-yellow-300">⚠️ Mọi vết thương bàn tay, dù nhỏ, đều phải được xem là phức tạp cho đến khi chứng minh được điều ngược lại.</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><strong>2. Đặc điểm</strong></td>
+                        <td>- <strong>Dễ nhiễm trùng</strong>: Do chức năng cầm nắm nên thường xuyên tiếp xúc với chất bẩn. Các bao hoạt dịch có thể thông nhau, gây viêm tấy lan tỏa (ví dụ: <code>áp xe hình móng ngựa</code>). <br> - <strong>Dễ hoại tử, lộ cấu trúc</strong>: Ít có cơ lớn và mô che phủ, vết thương mất da rộng dễ gây lộ và hoại tử gân, xương. <br> - <strong>Dễ gây tàn phế</strong>: Do dính gân, cứng khớp, can lệch xương, hoặc mất cảm giác tinh tế.</td>
+                        <td>- Luôn nghĩ đến nhiễm trùng sâu (viêm bao gân, viêm khớp) khi có vết thương nhỏ nhưng sưng đau nhiều. <br> - <span class="font-bold text-blue-300">Ưu tiên hàng đầu là che phủ các cấu trúc quan trọng (gân, xương, thần kinh).</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-1">
+                        <td><strong>3. Yêu cầu điều trị</strong></td>
+                        <td>- <strong>Yêu cầu rất cao</strong>: Cả về phục hồi giải phẫu và chức năng. <br> - <strong>Điều trị một thì</strong>: Lý tưởng nhất là tất cả các tổn thương (xương, gân, mạch máu, thần kinh) đều được sửa chữa ngay trong lần mổ đầu tiên. <br> - <strong>Phục hồi chức năng (PHCN) sớm</strong>: Là yếu tố then chốt quyết định thành công của điều trị.</td>
+                        <td><span class="font-bold">"Phẫu thuật hoàn hảo + PHCN đúng đắn = Kết quả tối ưu".</span></td>
+                    </tr>
+
+                    <!-- Section II: Giải Phẫu Ứng Dụng -->
+                    <tr class="bg-gray-700 text-white font-bold section-header" data-section="section-2">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <span>II. GIẢI PHẪU ỨNG DỤNG</span>
+                            <span class="toggle-icon transform transition-transform">▼</span>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><strong>1. Da</strong></td>
+                        <td>- <strong>Da gan tay</strong>: Dày, không di động, có các nếp gấp tự nhiên, chứa nhiều thụ thể cảm giác. <br> - <strong>Da mu tay</strong>: Mỏng, di động, có hệ thống tĩnh mạch nông dày đặc. <br> - <strong>Đường rạch da</strong>: Phải tôn trọng các nếp gấp tự nhiên, thường đi theo đường ziczac (Brunner) để tránh sẹo co rút.</td>
+                        <td>🔪 <span class="text-red-400 font-semibold">Không bao giờ rạch da thẳng và vuông góc với các nếp gấp của ngón tay.</span></td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><strong>2. Gân gấp</strong></td>
+                        <td>- <strong>Cấu trúc</strong>: Mỗi ngón dài (2-5) có 2 gân: Gấp nông (FDS) và Gấp sâu (FDP). Ngón cái có 1 gân Gấp dài (FPL). <br> - <strong>Hệ thống ròng rọc</strong>: Giữ gân áp sát xương. Gồm ròng rọc nhẫn (A1-A5) và chéo (C1-C3). <br> - <strong>Phân 5 Vùng (Verdan)</strong>: <br> &nbsp;&nbsp; - <strong>Vùng 1</strong>: Chỉ có FDP. <br> &nbsp;&nbsp; - <strong>Vùng 2</strong>: Cả FDS và FDP trong bao gân hẹp (<code>"No Man's Land"</code>). <br> &nbsp;&nbsp; - <strong>Vùng 3</strong>: Lòng bàn tay. <br> &nbsp;&nbsp; - <strong>Vùng 4</strong>: Ống cổ tay. <br> &nbsp;&nbsp; - <strong>Vùng 5</strong>: Trên ống cổ tay.</td>
+                        <td>- <strong>Ròng rọc <code>A2</code> và <code>A4</code> là quan trọng nhất</strong>; bắt buộc phải bảo tồn/tái tạo để tránh dấu hiệu <code>"dây cung" (bowstringing)</code>. <br> - <strong>Ưu tiên khâu gân gấp sâu (FDP)</strong>. <br> - <strong>Vùng 2</strong> có tiên lượng xấu nhất do nguy cơ dính gân rất cao.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-2">
+                        <td><strong>3. Gân duỗi</strong></td>
+                        <td>- <strong>Cấu trúc</strong>: Mỏng và dẹt hơn gân gấp. <br> - <strong>Loa gân duỗi (Extensor Hood)</strong>: Cơ chế phức tạp gồm dải trung tâm, các dải bên và sự tham gia của các cơ nội tại. <br> - <strong>Phân 8 Vùng</strong>: Các vùng lẻ (I, III, V, VII) tương ứng với các khớp (DIP, PIP, MCP, cổ tay).</td>
+                        <td>- <code>Mallet Finger</code>: Tổn thương Vùng I, mất duỗi khớp DIP. <br> - <code>Boutonnière Deformity</code>: Tổn thương Vùng III (đứt dải trung tâm), gây gập khớp PIP và ưỡn khớp DIP.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-2">
+                        <td><strong>4. Mạch máu & Thần kinh</strong></td>
+                        <td>- <strong>Mạch máu</strong>: ĐM quay và trụ tạo cung gan tay nông và sâu. <br> - <strong>TK Giữa</strong>: VĐ cơ đối chiếu ngón cái, CG 3,5 ngón phía quay. <br> - <strong>TK Trụ</strong>: VĐ các cơ nội tại, CG 1,5 ngón phía trụ. <br> - <strong>TK Quay</strong>: VĐ duỗi cổ tay/ngón, CG mu tay phía quay.</td>
+                        <td>- <code>Bàn tay khỉ (Ape Hand)</code>: Tổn thương TK Giữa. <br> - <code>Bàn tay vuốt trụ (Claw Hand)</code>: Tổn thương TK Trụ. <br> - <code>Bàn tay rủ (Wrist Drop)</code>: Tổn thương TK Quay. <br> - Đứt cả 2 động mạch ngón có thể gây hoại tử.</td>
+                    </tr>
+
+                    <!-- Section III: Chẩn Đoán -->
+                    <tr class="bg-gray-700 text-white font-bold section-header" data-section="section-3">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <span>III. CHẨN ĐOÁN</span>
+                            <span class="toggle-icon transform transition-transform">▼</span>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-3">
+                        <td><strong>1. Lâm sàng</strong></td>
+                        <td>- <strong>Hỏi bệnh</strong>: Cơ chế, thời gian, xử trí ban đầu. <br> - <strong>Nhìn</strong>: Tư thế nghỉ của ngón, biến dạng, màu sắc. <br> - <strong>Sờ</strong>: Điểm đau chói, lạo xạo xương, cảm giác. <br> - <strong>Vận động</strong>: Yêu cầu thực hiện các động tác chuyên biệt để test riêng từng gân, thần kinh.</td>
+                        <td>🕵️‍♂️ <strong>Nghiệm pháp quan trọng:</strong> <br> - <strong>Test FDP</strong>: Giữ PIP duỗi, yêu cầu gập DIP. <br> - <strong>Test FDS</strong>: Giữ các ngón khác duỗi, yêu cầu gập ngón cần khám. <br> - <strong>Test Elson</strong>: Gập PIP 90°, yêu cầu duỗi, nếu DIP duỗi là đứt dải trung tâm. <br> - <strong>Test Froment</strong>: Kẹp giấy, nếu gập IP ngón cái là liệt TK Trụ.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-3">
+                        <td><strong>2. Cận lâm sàng</strong></td>
+                        <td>- <strong>X-quang</strong>: **Bắt buộc cho mọi vết thương** để loại trừ gãy xương và dị vật cản quang. <br> - <strong>Siêu âm</strong>: Hữu ích để tìm dị vật không cản quang (gỗ) và đánh giá gân. <br> - <strong>CT/MRI</strong>: Cho các ca phức tạp hoặc chẩn đoán không rõ.</td>
+                        <td><span class="text-yellow-300">X-quang âm tính không loại trừ được tổn thương gân, thần kinh, mạch máu.</span></td>
+                    </tr>
+
+                    <!-- Section IV: Điều Trị (EXPANDED) -->
+                     <tr class="bg-gray-700 text-white font-bold section-header" data-section="section-4">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <span>IV. ĐIỀU TRỊ (CHI TIẾT)</span>
+                            <span class="toggle-icon transform transition-transform">▼</span>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><strong>1. Xử trí ban đầu</strong></td>
+                        <td>- <strong>Cầm máu</strong>: Băng ép trực tiếp, gạc vô trùng. <br> - <strong>Tháo trang sức</strong>: Nhẫn, vòng (ngăn ngừa hiệu ứng ga-rô khi chi sưng nề). <br> - <strong>Bất động</strong>: Nẹp ở tư thế cơ năng (cổ tay duỗi nhẹ 20°, MCP gập 70°, IP gập nhẹ). <br> - <strong>Gác cao tay</strong>: Trên mức tim để giảm phù nề. <br> - <strong>Dự phòng</strong>: <ul><li><strong>Uốn ván</strong>: Tiêm SAT/VAT theo tiền sử.</li><li><strong>Kháng sinh</strong>: Cephalosporin thế hệ 1 (vết thương sạch). Phổ rộng hơn (ví dụ: Amox-clav) cho vết thương bẩn/vết cắn.</li><li><strong>Giảm đau</strong>.</li></ul></td>
+                        <td><span class="text-red-400">Không kẹp "mò" mạch máu trong vết thương vì có thể làm tổn thương thần kinh đi kèm.</span> <br> Bất động và gác cao tay là 2 biện pháp giảm sưng nề hiệu quả nhất ban đầu.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><strong>2. Chuẩn bị phẫu thuật</strong></td>
+                        <td><ul><li><strong>Vô cảm</strong>: Tê đám rối thần kinh cánh tay là lựa chọn tối ưu, giúp giãn cơ và giảm đau sau mổ. Gây mê nếu đa chấn thương hoặc ở trẻ em.</li><li><strong>Ga-rô</strong>: Dùng ga-rô hơi, áp lực 250 mmHg ở cánh tay. Ghi nhận thời gian ga-rô (tối đa 90-120 phút).</li><li><strong>Rửa sạch</strong>: Toàn bộ chi bằng xà phòng và dung dịch sát khuẩn, cắt móng tay.</li><li><strong>Dụng cụ</strong>: Cần bộ dụng cụ vi phẫu, kính lúp/kính hiển vi, chỉ khâu chuyên dụng không chấn thương (3/0 đến 10/0).</li></ul></td>
+                        <td>Ga-rô giúp có phẫu trường sạch, cần thiết cho việc nhận diện các cấu trúc tinh tế. <br> Phẫu thuật bàn tay đòi hỏi sự tỉ mỉ, kiên nhẫn và dụng cụ phù hợp.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-4">
+                        <td><strong>3. Xử trí theo từng tổn thương</strong></td>
+                        <td><p class="font-bold text-white mb-2">Da và Phần mềm:</p>
+                        <ul><li><strong>Cắt lọc</strong>: Theo nguyên tắc "tiết kiệm", chỉ lấy bỏ mô dập nát, hoại tử rõ ràng.</li><li><strong>Rửa vết thương</strong>: Bơm rửa bằng áp lực với một lượng lớn (vài lít) nước muối sinh lý.</li><li><strong>Che phủ</strong>: Ưu tiên đóng da thì đầu nếu vết thương sạch. Nếu có khuyết hổng da, cần che phủ bằng vạt tại chỗ (<code>vạt V-Y</code>, <code>vạt chéo ngón</code>) hoặc ghép da.</li></ul>
+                        <p class="font-bold text-white mt-4 mb-2">Xương & Khớp:</p>
+                        <ul><li><strong>Cố định xương</strong>: Là bước đầu tiên để tạo khung vững. Ưu tiên cố định vững chắc (<code>ORIF</code> bằng nẹp vít nhỏ, vít Herbert) để cho phép vận động sớm. Kim Kirschner được dùng cho các gãy nhỏ, gãy phạm khớp.</li><li><strong>Trật khớp</strong>: Nắn kín. Nếu không vững, cố định tạm thời bằng kim Kirschner. Sửa chữa bao khớp, dây chằng nếu rách lớn.</li></ul>
+                        <p class="font-bold text-white mt-4 mb-2">Gân:</p>
+                        <ul><li><strong>Nguyên tắc khâu</strong>: Phải đủ chắc để chịu được lực kéo của PHCN sớm, trơn láng để dễ trượt, không làm thiếu máu nuôi gân.</li><li><strong>Kỹ thuật khâu</strong>: Khâu lõi (core suture) bằng 4-6 sợi chỉ (ví dụ: <code>Kessler</code>, <code>Tajima</code>) kết hợp khâu bao gân (epitendinous suture) bằng chỉ nhỏ.</li><li><strong>Gân gấp</strong>: Ưu tiên khâu FDP. Ở Vùng 2, phải bảo tồn tối đa ròng rọc A2, A4.</li><li><strong>Gân duỗi</strong>: Mỏng hơn, kỹ thuật khâu cần tỉ mỉ hơn.</li></ul>
+                        <p class="font-bold text-white mt-4 mb-2">Mạch máu & Thần kinh (Vi phẫu):</p>
+                        <ul><li><strong>Nguyên tắc</strong>: Khâu nối không căng (tension-free).</li><li><strong>Mạch máu</strong>: Dùng chỉ 8/0 - 10/0. Nếu mất đoạn, cần ghép bằng tĩnh mạch hiển đảo chiều.</li><li><strong>Thần kinh</strong>: Khâu bao thần kinh (epineural) hoặc bao bó sợi (fascicular). Nếu mất đoạn, cần ghép bằng thần kinh tự thân (thần kinh hiển ngoài, thần kinh bì cẳng tay).</li></ul>
+                        <p class="font-bold text-white mt-4 mb-2">Cắt cụt:</p>
+                        <ul><li><strong>Chỉ định</strong>: Khi ngón tay bị dập nát không còn khả năng cứu sống.</li><li><strong>Nguyên tắc</strong>: Bảo tồn tối đa chiều dài, tạo mỏm cụt không đau, che phủ bằng da có cảm giác tốt (da gan tay).</li></ul></td>
+                        <td>- Thứ tự ưu tiên trong phòng mổ: <strong>Xương -> Gân -> Mạch máu -> Thần kinh -> Da.</strong>
+                        <br>- Khâu gân nhiều sợi (multi-strand) và khâu bao gân là tiêu chuẩn vàng hiện nay.
+                        <br>- Mọi khâu nối mạch máu, thần kinh ở bàn tay đều cần kỹ thuật vi phẫu.
+                        <br>- Ngón cái chiếm 50% chức năng bàn tay, phải cố gắng cứu bằng mọi giá.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-4">
+                        <td><strong>4. Sau mổ & PHCN</strong></td>
+                        <td>- <strong>Bất động</strong>: Bằng nẹp bột ở tư thế bảo vệ mối khâu. Ví dụ sau khâu gân gấp: nẹp mu tay, cổ tay gập 20-30°, MCP gập 50-70°, IP gần duỗi. <br> - <strong>Chăm sóc</strong>: Gác cao tay, theo dõi tưới máu đầu chi, dùng kháng sinh/giảm đau. <br> - <strong>Tập luyện</strong>: Bắt đầu PHCN sớm (trong vòng 3-5 ngày sau mổ) dưới sự hướng dẫn của chuyên gia vật lý trị liệu. Các phác đồ phổ biến: <ul><li><strong>Duran (vận động thụ động)</strong>: Kỹ thuật viên di động các khớp của bệnh nhân.</li><li><strong>Kleinert (vận động thụ động-chủ động)</strong>: Dùng dây thun để gập ngón thụ động, bệnh nhân chủ động duỗi.</li></ul></td>
+                        <td><span class="font-bold text-blue-300">PHCN là một phần bắt buộc, không thể tách rời của quá trình điều trị.</span> <br> Sự tuân thủ của bệnh nhân trong quá trình tập luyện quyết định phần lớn kết quả cuối cùng.</td>
+                    </tr>
+                    
+                     <!-- Section V: Các Loại Vết Thương Đặc Biệt -->
+                     <tr class="bg-gray-700 text-white font-bold section-header" data-section="section-5">
+                        <td colspan="3" class="flex justify-between items-center">
+                            <span>V. CÁC LOẠI VẾT THƯƠNG ĐẶC BIỆT</span>
+                            <span class="toggle-icon transform transition-transform">▼</span>
+                        </td>
+                    </tr>
+                    <tr class="section-content" data-section="section-5">
+                        <td><strong>1. Vết thương đầu ngón</strong></td>
+                        <td>- <strong>Nguyên tắc</strong>: Bảo tồn tối đa chiều dài, đặc biệt ngón cái. <br> - <strong>Xử trí</strong>: Sửa chữa giường móng tỉ mỉ. Che phủ bằng vạt tại chỗ (<code>V-Y</code>) nếu lộ xương.</td>
+                        <td>- Ưu tiên dùng da từ phía gan tay để che phủ mỏm cụt vì có cảm giác tốt hơn.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-5">
+                        <td><strong>2. Vết cắn</strong></td>
+                        <td>- <strong>Nguy cơ</strong>: Nhiễm trùng rất cao, đa khuẩn (<code>Pasteurella</code> ở chó/mèo, <code>Eikenella</code> ở người). <br> - <strong>Xử trí</strong>: **Không khâu kín thì đầu**. Rửa sạch, cắt lọc, để hở, kháng sinh (Amox-clav), phòng Dại và Uốn ván.</td>
+                        <td>- <code>"Fight bite"</code> (vết thương trên khớp MCP do đấm vào miệng) phải được xem là một vết thương khớp hở, cần phẫu thuật rửa khớp cấp cứu.</td>
+                    </tr>
+                     <tr class="section-content" data-section="section-5">
+                        <td><strong>3. Bơm tiêm áp lực cao</strong></td>
+                        <td>- <strong>Đặc điểm</strong>: **Cấp cứu ngoại khoa tuyệt đối**. Vết vào nhỏ nhưng tổn thương bên trong cực kỳ rộng lớn. <br> - <strong>Xử trí</strong>: Phẫu thuật giải áp khoang (<code>fasciotomy</code>) và cắt lọc triệt để ngay lập tức.</td>
+                        <td><span class="text-red-500 font-bold">⚠️ Không bao giờ được đánh giá thấp một vết thương do bơm tiêm áp lực cao.</span> Sự trì hoãn sẽ dẫn đến cắt cụt.</td>
+                    </tr>
+                    <tr class="section-content" data-section="section-5">
+                        <td><strong>4. Bỏng</strong></td>
+                        <td>- <strong>Hóa chất</strong>: Rửa nước sạch liên tục, kéo dài. Không cố trung hòa. <br> - <strong>Điện</strong>: Tổn thương da bên ngoài ("tip of the iceberg") không phản ánh đúng hoại tử sâu. Nguy cơ toàn thân (rối loạn nhịp, suy thận cấp) và tại chỗ (hội chứng chèn ép khoang).</td>
+                        <td>- <strong>Bỏng kiềm (hoại tử hóa lỏng)</strong> thường sâu và nguy hiểm hơn <strong>bỏng acid (hoại tử đông vón)</strong>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 transform translate-y-2 focus:outline-none hover:bg-blue-700">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+            const allContentRows = Array.from(tableBody.querySelectorAll('tr.section-content'));
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            const resultCountEl = document.getElementById('searchResultCount');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+            function updateView() {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+        
+                // Step 1: Determine which rows match the query
+                allContentRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        row.dataset.matchesQuery = 'true';
+                    } else {
+                        row.dataset.matchesQuery = 'false';
+                    }
+                });
+        
+                // Step 2: Determine visibility of headers based on query matches
+                sectionHeaders.forEach(header => {
+                    const sectionId = header.dataset.section;
+                    const contentRows = document.querySelectorAll(`.section-content[data-section="${sectionId}"]`);
+                    const hasMatchingContent = Array.from(contentRows).some(row => row.dataset.matchesQuery === 'true');
+                    header.style.display = hasMatchingContent ? '' : 'none';
+                });
+        
+                // Step 3: Determine visibility of content rows based on both query match and collapsed state
+                allContentRows.forEach(row => {
+                    const matches = row.dataset.matchesQuery === 'true';
+                    const isCollapsed = row.classList.contains('collapsed');
+                    if (matches && !isCollapsed) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Update result count
+                if (query) {
+                    resultCountEl.textContent = `${visibleCount} kết quả được tìm thấy.`;
+                } else {
+                    resultCountEl.textContent = '';
+                }
+            }
+        
+            // Event listener for search input
+            searchInput.addEventListener('input', updateView);
+        
+            // Event listener for collapsing/expanding sections
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sectionId = header.dataset.section;
+                    const contentRows = document.querySelectorAll(`tr.section-content[data-section="${sectionId}"]`);
+                    const icon = header.querySelector('.toggle-icon');
+                    
+                    const isCurrentlyCollapsed = contentRows[0].classList.contains('collapsed');
+                    
+                    contentRows.forEach(row => {
+                        if (isCurrentlyCollapsed) {
+                            row.classList.remove('collapsed');
+                        } else {
+                            row.classList.add('collapsed');
+                        }
+                    });
+        
+                    icon.style.transform = isCurrentlyCollapsed ? 'rotate(0deg)' : 'rotate(180deg)';
+                    
+                    updateView(); // Update the entire view after toggling
+                });
+            });
+        
+            // Initial setup: collapse all sections except the first one
+            sectionHeaders.forEach(header => {
+                if (header.dataset.section !== 'section-1') {
+                    const sectionId = header.dataset.section;
+                    const contentRows = document.querySelectorAll(`.section-content[data-section="${sectionId}"]`);
+                    const icon = header.querySelector('.toggle-icon');
+                    contentRows.forEach(row => row.classList.add('collapsed'));
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        
+            // Scroll to Top Button Functionality
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.remove('opacity-0', 'translate-y-2');
+                } else {
+                    scrollTopBtn.classList.add('opacity-0', 'translate-y-2');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        
+            // Initial render
+            updateView();
+        });
+    </script>
+
+</body>
+</html>
+
